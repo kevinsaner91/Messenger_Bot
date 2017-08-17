@@ -40,7 +40,7 @@ app.post('/webhook/', function (req, res) {
 				console.log("welcome to chatbot")
 				continue
 			}
-			if (text.substring.includes("Info")){
+			if(text.substring(0, 200).includes("Info")){
 				sendTextMessage(sender, "All relevant Info")
 			}
 			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
