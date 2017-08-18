@@ -41,15 +41,28 @@ app.post('/webhook/', function (req, res) {
 				continue
 			}
 			let message = text.substring(0, 50).toLowerCase();
+			
 			switch(message){
 				case "info":
+					sendTextMessage(sender, "GV am 8. September");
+					break;
+				case "info 1":
 					sendTextMessage(sender, "Match am 14.00");
 					break;
 				case "info 2":
 					sendTextMessage(sender, "Match am 17.00");
 					break;
-				case "info 1":
+				case "info 3":
 					sendTextMessage(sender, "Match abgesagt");
+					break;
+				case "live 1":
+					sendTextMessage(sender, "FCKB - FC Attiswil 1:0");
+					break;
+				case "live 2":
+					sendTextMessage(sender, "FCKB - FC Kestenholz 4:0");
+					break;
+				case "live 3":
+					sendTextMessage(sender, "FC Mümliswil - FCKB 0:7");
 					break;
 				default:
 					sendTextMessage(sender, "Text nicht erkannt: " + text.substring(0, 200));
