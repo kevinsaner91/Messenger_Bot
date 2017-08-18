@@ -43,6 +43,8 @@ app.post('/webhook/', function (req, res) {
 			let message = text.substring(0, 50).toLowerCase();
 			
 			switch(message){
+				case "hilfe":
+					sendTextMessage(sender, "Für allgemeine Informationen sende \"Info\"\n Für Infos zur 1. Mannschaft sende \"Info 1\"\n Für Liveticker zur 1.Mannschaft sende \"Live 1\"\n");
 				case "info":
 					sendTextMessage(sender, "GV am 8. September");
 					break;
