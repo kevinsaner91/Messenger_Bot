@@ -40,10 +40,20 @@ app.post('/webhook/', function (req, res) {
 				console.log("welcome to chatbot")
 				continue
 			}
-			if(text.substring(0, 200).includes("Info")){
-				sendTextMessage(sender, "All relevant Info")
+			let message = text.substring(0, 50).toLowerCase();
+			switch(message){
+				case "info":
+					sendTextMessage(sender, "Match am 14.00");
+					break;
+				case "info 2":
+					sendTextMessage(sender, "Match am 17.00");
+					break;
+				case "info 1":
+					sendTextMessage(sender, "Match abgesagt");
+					break;
+				default:
+					sendTextMessage(sender, "Text nicht erkannt: " + text.substring(0, 200));
 			}
-			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)
@@ -63,6 +73,7 @@ function sendTextMessage(sender, text) {
 	let messageData = { text:text }
 	
 	request({
+		
 		url: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: {access_token:token},
 		method: 'POST',
