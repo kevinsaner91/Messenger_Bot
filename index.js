@@ -68,7 +68,7 @@ app.post('/webhook/', function (req, res) {
 				case "live 3":
 					sendTextMessage(sender, "FC Mümliswil - FCKB 0:7");
 					break;
-				case "Bericht 2":
+				case "bericht 2":
 					callWebsite();
 					break;
 				default:
