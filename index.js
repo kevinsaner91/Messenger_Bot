@@ -69,6 +69,7 @@ app.post('/webhook/', function (req, res) {
 					sendTextMessage(sender, "FC Mümliswil - FCKB 0:7");
 					break;
 				case "bericht 2":
+					sendTextMessage(sender, "API call")
 					callWebsite();
 					break;
 				default:
@@ -138,7 +139,7 @@ function callWebsite(){
 	  var out = out.replaceAll(filter[i], "");
     }
   
-    sendTextMessage(out);
+    sendTextMessage(sender, out);
   }); 
 }
 
