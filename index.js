@@ -5,7 +5,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
 const app = express();
-const request = require("request");
 const cheerio = require("cheerio");
 
 app.set('port', (process.env.PORT || 5000))
@@ -69,8 +68,9 @@ app.post('/webhook/', function (req, res) {
 				case "live 3":
 					sendTextMessage(sender, "FC Mümliswil - FCKB 0:7");
 					break;
-				case: "Bericht 2":
+				case "Bericht 2":
 					callWebsite();
+					break;
 				default:
 					sendTextMessage(sender, "Text nicht erkannt: " + text.substring(0, 200));
 			}
