@@ -1,10 +1,12 @@
 
 'use strict'
 
-const express = require('express')
-const bodyParser = require('body-parser')
-const request = require('request')
-const app = express()
+const express = require('express');
+const bodyParser = require('body-parser');
+const request = require('request');
+const app = express();
+const request = require("request");
+const cheerio = require("cheerio");
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -67,6 +69,8 @@ app.post('/webhook/', function (req, res) {
 				case "live 3":
 					sendTextMessage(sender, "FC Mümliswil - FCKB 0:7");
 					break;
+				case: "Bericht 2":
+					callWebsite();
 				default:
 					sendTextMessage(sender, "Text nicht erkannt: " + text.substring(0, 200));
 			}
@@ -111,3 +115,34 @@ function sendTextMessage(sender, text) {
 app.listen(app.get('port'), function() {
 	console.log('running on port', app.get('port'))
 })
+
+
+
+var HtmlBody;
+var filter = ["</span>", "</strong>", "</p>", "<span style=\"font-size: small;\">", "<p", "<p>", "<span", "style=\"", "margin:", "0cm", "'Arial',sans-serif;\">", "0pt;\">", "&nbsp;", "font-family:", ">", "  "];
+
+function callWebsite(){
+  request({
+    uri: "http://www.fc-klus-balsthal.ch/teams/2-mannschaft/1702",
+  }, function(error, response, body) {
+
+
+    var NameString = body.toString();
+    //console.log(NameString);
+    var indexStart = NameString.lastIndexOf("2. Mannschaft ");
+    var indexStop = NameString.indexOf("<ul class=\"uk-pagination\">");
+    console.log(indexStart + " - " + indexStop)
+    var out = NameString.substring(indexStart, indexStop);
+  
+    for (i = 0; i < filter.length; i++) {
+	  var out = out.replaceAll(filter[i], "");
+    }
+  
+    sendTextMessage(out);
+  }); 
+}
+
+ String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.split(search).join(replacement);
+}
